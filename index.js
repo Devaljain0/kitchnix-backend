@@ -15,7 +15,10 @@ const orderRoute = require('./routes/order')
 const userRoute = require('./routes/userProfile');
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "https://kitchnix-frontend-72vtrqbv9-devaljain525-gmailcoms-projects.vercel.app",
+  credentials: true // if you're using cookies or auth headers
+}));
 
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1',loginRouter);
