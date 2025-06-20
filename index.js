@@ -16,7 +16,7 @@ const userRoute = require('./routes/userProfile');
 
 app.use(express.json());
 app.use(cors({
-  origin: "https://kitchnix-frontend-72vtrqbv9-devaljain525-gmailcoms-projects.vercel.app",
+  origin: "https://kitchnix-frontend-git-main-devaljain525-gmailcoms-projects.vercel.app",
   credentials: true // if you're using cookies or auth headers
 }));
 
