@@ -13,6 +13,7 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   connectionString: process.env.Deval,
+  ssl: { rejectUnauthorized: false } 
 });
 
 // Function to create the users table if it doesn't exist
@@ -65,8 +66,7 @@ const createAdditionalTables = async () => {
       recipe_cooktime INT NOT NULL,
       recipe_cost NUMERIC(5,2) NOT NULL,
       recipe_isveg BOOLEAN DEFAULT true,
-      recipe_imgurl VARCHAR(200),
-      PRIMARY KEY (recipe_id)
+      recipe_imgurl VARCHAR(200)
     );
 
     
@@ -130,7 +130,7 @@ const getUsersData = async() => {
 
 
 createAdditionalTables();
-getUsersData();
+//getUsersData();
 module.exports = module.exports = {
   query: (text, params) => pool.query(text, params),
-};;
+};
