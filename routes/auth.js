@@ -11,7 +11,7 @@ router.post('/register', async (req, res) => {
 
   try {
     // Check if the user already exists
-    const userCheckQuery = 'SELECT * FROM useraccount WHERE email = $1';
+    const userCheckQuery = 'SELECT * FROM useraccount WHERE user_email = $1';
     const userCheckResult = await client.query(userCheckQuery, [email]);
 
     if (userCheckResult.rows.length > 0) {
@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
 
     // Proceed to register the user
     const insertUserQuery = `
-      INSERT INTO users (email, username, password, phone_no)
+      INSERT INTO useraccount (email, username, password, phone_no)
       VALUES ($1, $2, $3, $4)
       RETURNING *;
     `;
@@ -49,9 +49,9 @@ router.post('/verify', async (req, res) => {
     if (codes[email] && codes[email] === code) {
       // Update the user's verified status
       const updateUserQuery = `
-        UPDATE users
-        SET verified = true
-        WHERE email = $1
+        UPDATE useraccount
+        SET user_verification_statuse = true
+        WHERE user_email = $1
         RETURNING *;
       `;
       const updatedUser = await client.query(updateUserQuery, [email]);
