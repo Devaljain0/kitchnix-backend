@@ -20,7 +20,7 @@ router.post('/register', async (req, res) => {
 
     // Proceed to register the user
     const insertUserQuery = `
-      INSERT INTO useraccount (email, username, password, phone_no)
+      INSERT INTO useraccount (user_email, user_name, user_password, user_phn_no)
       VALUES ($1, $2, $3, $4)
       RETURNING *;
     `;
@@ -50,7 +50,7 @@ router.post('/verify', async (req, res) => {
       // Update the user's verified status
       const updateUserQuery = `
         UPDATE useraccount
-        SET user_verification_statuse = true
+        SET user_verification_status = true
         WHERE user_email = $1
         RETURNING *;
       `;
