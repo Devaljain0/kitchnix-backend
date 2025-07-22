@@ -15,8 +15,19 @@ const orderRoute = require('./routes/order')
 const userRoute = require('./routes/userProfile');
 
 app.use(express.json());
+const allowedOrigins = [
+  "https://kitchnix-frontend-git-main-devaljain525-gmailcoms-projects.vercel.app",
+  "https://kitchnix-frontend-ny25-e260o3h4r.vercel.app"
+];
+ 
 app.use(cors({
-  origin: "https://kitchnix-frontend-git-main-devaljain525-gmailcoms-projects.vercel.app",
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true // if you're using cookies or auth headers
 }));
 
